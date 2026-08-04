@@ -1,0 +1,1 @@
+"""UI package for Posture Pal (main window + shop window)."""
