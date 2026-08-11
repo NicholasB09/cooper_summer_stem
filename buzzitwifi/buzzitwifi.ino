@@ -12,6 +12,14 @@ int counter = 0;
 int currentState = -1; // 0 = too close, 1 = okay, 2 = too far
 int distance = 0;
 
+// Buffer for incoming serial data
+const size_t MAX_CMD_LEN = 64;
+char serialBuffer[MAX_CMD_LEN];
+size_t serialBufferIdx = 0;
+
+// Dynamic app state variable triggered by GUI
+String activeEffect = "none";
+
 #include <Wire.h>
 #include <VL53L0X_mod.h>
 #include <U8g2lib.h> // Library for SSD1309 OLED
@@ -98,6 +106,7 @@ void setup() {
   Serial.println("Server started. Waiting for clients...");
 }
 
+
 void loop() {
   // Read distance in millimeters using single-shot mode
   distance1 = sensor1.readRangeSingleMillimeters();
@@ -138,6 +147,15 @@ void loop() {
       // else {
       //   client.println("too far");
       // }
+
+      if (client.available()) {
+        String incomingMsg = client.readStringUntil('\n');
+        incomingMsg.trim(); // Removes '\r' and whitespace
+
+        Serial.print("Received line: ");
+        Serial.println(incomingMsg);
+      }
+
       distance1 = sensor1.readRangeSingleMillimeters();
       distance2 = sensor2.readRangeSingleMillimeters();
 
