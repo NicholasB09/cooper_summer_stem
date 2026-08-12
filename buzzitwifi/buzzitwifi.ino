@@ -17,6 +17,8 @@ const size_t MAX_CMD_LEN = 64;
 char serialBuffer[MAX_CMD_LEN];
 size_t serialBufferIdx = 0;
 
+String incomingMsg;
+
 // Dynamic app state variable triggered by GUI
 String activeEffect = "none";
 
@@ -149,13 +151,14 @@ void loop() {
       // }
 
       if (client.available()) {
-        String incomingMsg = client.readStringUntil('\n');
+        incomingMsg = client.readStringUntil('\n');
         incomingMsg.trim();
-         // Removes '\r' and whitespace
-         if(incomingMsg == "UNLOCK:dog") {
-          u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_Dog[counter])));
-          counter = (counter + 1) % 22; 
-         }
+        // Removes '\r' and whitespace
+        //  if(incomingMsg == "UNLOCK:dog") {
+        //   u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_okay[counter]))); 
+        //   if (counter < DOG - 1) counter++;
+        //   Serial.println("Dog animation should play");
+        //  }
         Serial.print("Received line: ");
         Serial.println(incomingMsg);
       }
@@ -210,7 +213,10 @@ void handleStateAndAnimation(WiFiClient* client) {
   int newState;
 
   // 1. Evaluate distance ranges and output Wi-Fi status string
-  if (distance1 < 50 && distance2 < 50) {
+  if (incomingMsg == "UNLOCK:dog") {
+    newState = -1;
+  }
+  else if (distance1 < 50 && distance2 < 50) {
     newState = 0; // "too close"
     if (client && client->connected()) client->println("too close");
   } else if (distance1 < 150 && distance2 < 150) {
@@ -241,7 +247,11 @@ void handleStateAndAnimation(WiFiClient* client) {
   } else if (currentState == 2) {
     u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_tooFar[counter]))); 
     if (counter < FRAMES_TOO_FAR - 1) counter++;
-  }
+  } else if (currentState == -1) {
+    u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_Dog[counter]))); 
+    if (counter < DOG - 1) counter++;
+
+  } 
 
   u8g2.sendBuffer();
 }

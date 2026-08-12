@@ -1114,7 +1114,7 @@ const unsigned char epd_bitmap_angy20007 [] PROGMEM = {
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 17136)
 const int epd_bitmap_allArray_LEN = 21;
-const unsigned char* epd_bitmap_allArray[21] = {
+const unsigned char* epd_bitmap_allArrayAngy[21] = {
 	epd_bitmap_angy20000,
 	epd_bitmap_angy20001,
 	epd_bitmap_angy200010,
@@ -2252,8 +2252,8 @@ const unsigned char epd_bitmap_frame0020 [] PROGMEM = {
 };
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 17136)
-const int epd_bitmap_allArray_LEN = 21;
-const unsigned char* epd_bitmap_allArray[21] = {
+// const int epd_bitmap_allArray_LEN = 21;
+const unsigned char* epd_bitmap_allArrayFrame[21] = {
 	epd_bitmap_frame0000,
 	epd_bitmap_frame0001,
 	epd_bitmap_frame0002,
@@ -3391,8 +3391,8 @@ const unsigned char epd_bitmap_happi0020 [] PROGMEM = {
 };
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 17136)
-const int epd_bitmap_allArray_LEN = 21;
-const unsigned char* epd_bitmap_allArray[21] = {
+// const int epd_bitmap_allArray_LEN = 21;
+const unsigned char* epd_bitmap_allArrayHappi[21] = {
 	epd_bitmap_happi0000,
 	epd_bitmap_happi0001,
 	epd_bitmap_happi0002,
@@ -4531,7 +4531,7 @@ const unsigned char epd_bitmap_dog0015 [] PROGMEM = {
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 17136)
 const int DOG = 21;
-const unsigned char* epd_bitmap_Dog[DOG] = {
+const unsigned char* epd_bitmap_Dog[DOG] PROGMEM = {
 	epd_bitmap_dog0000,
 	epd_bitmap_dog0001,
 	epd_bitmap_dog0002,
@@ -4561,10 +4561,10 @@ const int FRAMES_TOO_CLOSE = 21;
 const unsigned char* const epd_bitmap_tooClose[FRAMES_TOO_CLOSE] PROGMEM = {
   epd_bitmap_angy20000, epd_bitmap_angy20001, epd_bitmap_angy20002, epd_bitmap_angy20003,
   epd_bitmap_angy20004, epd_bitmap_angy20005, epd_bitmap_angy20006, epd_bitmap_angy20007,
-  epd_bitmap_angy20008, epd_bitmap_angy20009, epd_bitmap_angy20010, epd_bitmap_angy20011,
-  epd_bitmap_angy20012, epd_bitmap_angy20013, epd_bitmap_angy20014, epd_bitmap_angy20015,
-  epd_bitmap_angy20016, epd_bitmap_angy20017, epd_bitmap_angy20018, epd_bitmap_angy20019,
-  epd_bitmap_angy20020
+  epd_bitmap_angy20008, epd_bitmap_angy20009, epd_bitmap_angy200010, epd_bitmap_angy200011,
+  epd_bitmap_angy200012, epd_bitmap_angy200013, epd_bitmap_angy200014, epd_bitmap_angy200015,
+  epd_bitmap_angy200016, epd_bitmap_angy200017, epd_bitmap_angy200018, epd_bitmap_angy200019,
+  epd_bitmap_angy200020
 };
 
 const int FRAMES_OKAY = 21;
