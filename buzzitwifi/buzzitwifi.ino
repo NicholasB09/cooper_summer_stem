@@ -152,7 +152,7 @@ void loop() {
         String incomingMsg = client.readStringUntil('\n');
         incomingMsg.trim();
          // Removes '\r' and whitespace
-         u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_Dog[counter])))
+         u8g2.drawXBMP(0, 0, 128, 50, (const unsigned char*)pgm_read_ptr(&(epd_bitmap_Dog[counter])));
           counter = (counter + 1) % 22; 
         Serial.print("Received line: ");
         Serial.println(incomingMsg);

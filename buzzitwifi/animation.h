@@ -4530,8 +4530,8 @@ const unsigned char epd_bitmap_dog0016 [] PROGMEM = {
 };
 
 // Array of all bitmaps for convenience. (Total bytes used to store images in PROGMEM = 17136)
-const int epd_bitmap_allArray_LEN = 21;
-const unsigned char* epd_bitmap_Dog[21] = {
+const int DOG = 21;
+const unsigned char* epd_bitmap_Dog[DOG] = {
 	epd_bitmap_dog0000,
 	epd_bitmap_dog0001,
 	epd_bitmap_dog0002,
