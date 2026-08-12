@@ -51,6 +51,9 @@ SIGNAL_TOO_CLOSE = "too close"
 # Change UNLOCK_PREFIX if your ESP32 sketch expects a different keyword.
 UNLOCK_PREFIX = "UNLOCK"
  
+# New: Command sent to ESP32 to set current posture as baseline
+CALIBRATE_COMMAND = "CALIBRATE"
+
 # ---------------------------------------------------------------------------
 # Posture Points
 # ---------------------------------------------------------------------------
