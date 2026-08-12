@@ -164,3 +164,4 @@ class ShopWindow(ctk.CTkToplevel):
     def _trigger_animation(self, anim_id):
         cmd = f"{config.UNLOCK_PREFIX}:{anim_id}"
         self.send_command(cmd)
+        print(cmd)

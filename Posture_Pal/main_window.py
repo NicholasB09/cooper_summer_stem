@@ -221,6 +221,7 @@ class MainWindow(ctk.CTk):
         self.points_tile.grid(row=0, column=2, padx=(4, 0), sticky="nsew")
 
         # Shop Action Button
+        # Shop Action Button (Updated pady so they stack nicely)
         self.shop_button = ctk.CTkButton(
             self,
             text="🛍   Open Reward Shop",
@@ -231,7 +232,20 @@ class MainWindow(ctk.CTk):
             font=ctk.CTkFont(size=14, weight="bold"),
             command=self._open_shop
         )
-        self.shop_button.pack(padx=24, pady=(4, 20), fill="x")
+        self.shop_button.pack(padx=24, pady=(4, 8), fill="x")
+
+        # New: Calibration Button
+        self.calibrate_button = ctk.CTkButton(
+            self,
+            text="🎯   Calibrate Posture",
+            height=48,
+            corner_radius=14,
+            fg_color="#059669", # A nice emerald green
+            hover_color="#047857",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            command=self._calibrate_posture
+        )
+        self.calibrate_button.pack(padx=24, pady=(0, 20), fill="x")
 
         # Footer Status Bar
         footer = ctk.CTkFrame(
@@ -357,3 +371,20 @@ class MainWindow(ctk.CTk):
         self.points_manager.save_if_dirty(force=True)
         self.serial_manager.stop()
         self.destroy()
+
+    def _calibrate_posture(self):
+        """Sends a calibration command to the ESP32 and updates the UI briefly."""
+        # Send the command through the existing queue
+        self.serial_manager.send_command(config.CALIBRATE_COMMAND)
+
+        # Give some slick visual feedback so the user knows it worked
+        original_text = self.calibrate_button.cget("text")
+        original_color = self.calibrate_button.cget("fg_color")
+        
+        self.calibrate_button.configure(text="✅   Calibrated!", fg_color="#10B981")
+        
+        # Reset the button visually after 2 seconds
+        self.after(2000, lambda: self.calibrate_button.configure(
+            text=original_text, 
+            fg_color=original_color
+        ))
